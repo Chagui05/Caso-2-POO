@@ -9,7 +9,7 @@ public class JActionButton extends JButton{
 	public JActionButton(ButtonAction pAction, String pLabel) {
 		super(pLabel);
 		this.setBackground(Color.LIGHT_GRAY);
-		action = pAction;
+		this.action = pAction;
 	}
 
 }
