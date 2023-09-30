@@ -25,8 +25,8 @@ public class TransactionWindow extends JFrame{
         labelTitle.setForeground(Color.BLACK); 
         labelTitle.setBounds(240, 30, 150, 40);
         
-        String[] options = {"1000", "2000", "5000","6000", "10000"};
-        JComboBox<String> paymentBox = new JComboBox<>(options);
+        Integer[] options = {1000, 2000, 5000,6000, 10000};
+        JComboBox<Integer> paymentBox = new JComboBox<>(options);
         paymentBox.setBounds(230, 80, 150, 40);
         
         JActionButton payButton = new JActionButton(ButtonAction.PAY,"Recargar monto");
