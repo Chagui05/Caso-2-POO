@@ -3,7 +3,7 @@ package modelo;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Transaction implements Serializable{
+public abstract class Transaction implements Serializable{
 	private int amount;//plata que entro o salio
 	private String name;//
 	private int userId;
