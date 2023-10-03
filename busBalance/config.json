@@ -1,0 +1,47 @@
+{
+  "routes": [
+    {
+      "name": "Heredia-TEC",
+      "price": 3000
+    },
+    {
+      "name": "Cartago-TEC",
+      "price": 300
+    },
+    {
+      "name": "Alajuela-TEC",
+      "price": 2000
+    },
+    {
+      "name": "SanJose-TEC",
+      "price": 300
+    },
+    {
+      "name": "Coronado-TEC",
+      "price": 1000
+    },
+    {
+      "name": "Tibas-TEC",
+      "price": 1000
+    },
+    {
+      "name": "SanJose-Heredia",
+      "price": 450
+    },
+    {
+      "name": "Heredia-SanJose",
+      "price": 450
+    },
+    {
+      "name": "Limon-SanJose",
+      "price": 2000
+    },
+    {
+      "name": "SanJose-Limon",
+      "price": 2000
+    }
+  ],
+  "newTransactionPeriod": 120,
+  "serviceOpen": "5:00:00",
+  "serviceClose": "23:00:00"
+}
