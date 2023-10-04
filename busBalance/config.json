@@ -42,6 +42,6 @@
     }
   ],
   "newTransactionPeriod": 120,
-  "serviceOpen": "5:00:00",
-  "serviceClose": "23:00:00"
+  "serviceOpen": "05:00",
+  "serviceClose": "23:00"
 }

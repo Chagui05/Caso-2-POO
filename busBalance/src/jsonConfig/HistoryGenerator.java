@@ -52,13 +52,15 @@ public class HistoryGenerator implements Runnable{
 
 	@Override
 	public void run() {
+		addTransactionToUser();
 		while(running) {
 			
 			try {
+				Thread.sleep(timeConfig.getNewTransactionPeriod()*1000);
 				if(clock.getActualTime().isAfter(timeConfig.getServiceOpen()) && clock.getActualTime().isBefore(timeConfig.getServiceClose())) {
 					addTransactionToUser();
-					Thread.sleep(timeConfig.getNewTransactionPeriod());
 				}
+				
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

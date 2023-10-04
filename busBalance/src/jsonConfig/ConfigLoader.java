@@ -59,11 +59,11 @@ public class ConfigLoader {
 			timeConfig.setNewTransactionPeriod(jsonparser.getInt("newTransactionPeriod"));
 			
 			String horaString = jsonparser.getString("serviceOpen");
-			LocalTime hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm:ss"));
+			LocalTime hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
 			timeConfig.setServiceOpen(hora);
 			
 			horaString = jsonparser.getString("serviceOpen");
-			hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm:ss"));
+			hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
 			timeConfig.setServiceClose(hora);
 		}
 		return timeConfig;

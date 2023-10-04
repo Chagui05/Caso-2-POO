@@ -8,6 +8,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 import clock.Clock;
+import jsonConfig.ConfigLoader;
+import jsonConfig.RouteConfig;
+import jsonConfig.TimeConfig;
 
 public class MainWindow extends JFrame {
 	private TransactionWindow TransactionWindow;
@@ -110,9 +113,15 @@ public class MainWindow extends JFrame {
 		SwingUtilities.invokeLater(() -> {
 			MainWindow frame = new MainWindow();
 	        frame.setVisible(true);
-	    });
-		Clock hilo = new Clock();
-        
+	    }); 
+		ConfigLoader prueba = new ConfigLoader(); 
+		int p = 2;
+		System.out.println(prueba.getRouteConfig().getRoutes().elementAt(p).getName());
+		System.out.println(prueba.getTimeConfig().getNewTransactionPeriod());
+		Clock clock = new Clock();
+		clock.start();
+		
+
 	}
 
 }
