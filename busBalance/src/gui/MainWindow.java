@@ -7,6 +7,8 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
+import clock.Clock;
+
 public class MainWindow extends JFrame {
 	private TransactionWindow TransactionWindow;
 	private HistoryWindow HistoryWindow;
@@ -109,6 +111,8 @@ public class MainWindow extends JFrame {
 			MainWindow frame = new MainWindow();
 	        frame.setVisible(true);
 	    });
+		Clock hilo = new Clock();
+        
 	}
 
 }

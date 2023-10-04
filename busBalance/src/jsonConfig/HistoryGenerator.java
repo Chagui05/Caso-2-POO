@@ -2,6 +2,8 @@ package jsonConfig;
 
 import java.time.LocalDate;
 import java.util.Vector;
+
+import clock.Clock;
 import modelo.*;
 
 public class HistoryGenerator implements Runnable{
@@ -10,11 +12,13 @@ public class HistoryGenerator implements Runnable{
 	private RouteConfig routeConfig;
 	private Route asignedRoute;
 	private TimeConfig timeConfig;
+	private Clock clock;
 
-	public HistoryGenerator() {
+	public HistoryGenerator(Clock pClock) {
 		this.routeConfig = new ConfigLoader().getRouteConfig();
 		this.usersRegistered = new UserManager().unSerializeUsersRegistered();
 		this.timeConfig = new ConfigLoader().getTimeConfig();
+		this.clock = pClock;
 	}
 	
 	public void generateTransaction(User pUser) {
@@ -51,8 +55,10 @@ public class HistoryGenerator implements Runnable{
 		while(running) {
 			
 			try {
-				addTransactionToUser();
-				Thread.sleep(timeConfig.getNewTransactionPeriod());
+				if(clock.getActualTime().isAfter(timeConfig.getServiceOpen()) && clock.getActualTime().isBefore(timeConfig.getServiceClose())) {
+					addTransactionToUser();
+					Thread.sleep(timeConfig.getNewTransactionPeriod());
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
