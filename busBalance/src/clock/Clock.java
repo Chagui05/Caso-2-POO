@@ -31,7 +31,12 @@ public class Clock extends Thread{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
+			
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	public LocalTime getActualTime() {
