@@ -17,6 +17,15 @@ public class TimeConfig {
 	public void setServiceClose(LocalTime serviceClose) {
 		this.serviceClose = serviceClose;
 	}
+	public int getNewTransactionPeriod() {
+		return newTransactionPeriod;
+	}
+	public LocalTime getServiceOpen() {
+		return serviceOpen;
+	}
+	public LocalTime getServiceClose() {
+		return serviceClose;
+	}
 
 	
 

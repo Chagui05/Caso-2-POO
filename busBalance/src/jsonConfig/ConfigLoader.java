@@ -20,7 +20,6 @@ public class ConfigLoader {
 
 	public ConfigLoader() {
 		loadJson();
-		routeConfig = new RouteConfig();
 	}
 
 
