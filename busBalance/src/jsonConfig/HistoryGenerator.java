@@ -98,7 +98,6 @@ public class HistoryGenerator implements Runnable{
 					addTransactionToUsers();
 				}
 				
-				
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
