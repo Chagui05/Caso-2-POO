@@ -64,7 +64,7 @@ public class HistoryGenerator implements Runnable{
 	//crea usuarios de "mentira" al inicio con parametros del json
 	public void generateInitialUsers() {
 		
-		if(userManager.getUsersRegistered() == null) {
+		if(userManager.getUsersRegistered().isEmpty()) {
 			
 			Vector<User> usersRegistered = new Vector<User>();
 			int usersCount = transactionConfig.getInitialUsersCount();
@@ -74,6 +74,7 @@ public class HistoryGenerator implements Runnable{
 				System.out.println("se creo Usuario "+newUser.getId());
 			}
 			userManager.setUsersRegistered(usersRegistered);
+			System.out.println("en la funcion "+userManager.getUser(2));
 		}
 	}
 	
@@ -88,8 +89,8 @@ public class HistoryGenerator implements Runnable{
 		while(running) {
 			
 			try {
+				System.out.println("en el hilo "+userManager.getUser(2));
 				Thread.sleep(transactionConfig.getNewTransactionPeriod()*1000);
-				
 				if(clock.getActualTime().isAfter(transactionConfig.getServiceOpen()) && clock.getActualTime().isBefore(transactionConfig.getServiceClose())) {
 					howManyTravel();
 				}

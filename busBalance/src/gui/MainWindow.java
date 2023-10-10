@@ -23,6 +23,7 @@ public class MainWindow extends JFrame {
 	public MainWindow(UserManager pUsermanager) {
 		historyController = new HistoryController();
 		this.usermanager = pUsermanager;
+		System.out.println("creando ventana");
 		
 		/*
 		 * creación de un usuario basado en la identificación del usuario

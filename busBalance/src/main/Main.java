@@ -19,8 +19,13 @@ public class Main {
         Thread historyThread = new Thread(historyGenerator);
         clock.start();
         historyThread.start();
-        
-       System.out.println(userManager.getUser(2));
+        try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+      	System.out.println("en el main "+userManager.getUser(2));
         
         SwingUtilities.invokeLater(() -> {
 			MainWindow frame = new MainWindow(userManager);

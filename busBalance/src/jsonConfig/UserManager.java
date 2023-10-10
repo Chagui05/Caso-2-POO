@@ -15,7 +15,7 @@ public class UserManager implements Serializable {
 	private /*Static*/Vector<User> usersRegistered;
 
 	public UserManager() {
-		usersRegistered = null;
+		usersRegistered = new Vector<User>();
 	}
 	
 	public Vector<User> getUsersRegistered() {
