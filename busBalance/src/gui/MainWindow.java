@@ -2,21 +2,27 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.*;
 
-import clock.Clock;
-import jsonConfig.ConfigLoader;
-import jsonConfig.RouteConfig;
-import jsonConfig.TimeConfig;
+import Controller.HistoryController;
+import jsonConfig.UserManager;
 
 public class MainWindow extends JFrame {
 	private TransactionWindow TransactionWindow;
 	private HistoryWindow HistoryWindow;
+	private JActionButton buttonShowTransactionWindow;
+	private JActionButton buttonShowHistoryWindow;
+	private JTextField userIDToConsult;
+	private UserManager usermanager;
+	private HistoryController historyController;
 	
-	public MainWindow() {
+	public MainWindow(UserManager pUsermanager) {
+		historyController = new HistoryController();
+		this.usermanager = pUsermanager;
 		
 		/*
 		 * creación de un usuario basado en la identificación del usuario
@@ -72,17 +78,17 @@ public class MainWindow extends JFrame {
         userToConsult.setForeground(Color.BLACK); 
         userToConsult.setBounds(515, 30, 200, 40);
         
-        JTextField userIDToConsult = new JTextField();
+        userIDToConsult = new JTextField();
         userIDToConsult.setBounds(500, 70, 202, 30);
         
         ImageIcon imageIcon2 = new ImageIcon("blackLine.png");
         JLabel imageBlackLine2 = new JLabel(imageIcon2);
         imageBlackLine2.setBounds(520, 110, 150, 230);
         
-        JActionButton buttonShowTransactionWindow = new JActionButton(ButtonAction.SHOW_HISTORY,"Recargas");
+        buttonShowTransactionWindow = new JActionButton(ButtonAction.SHOW_HISTORY,"Recargas");
         buttonShowTransactionWindow.setBounds(370, 210, 170, 80);
         
-        JActionButton buttonShowHistoryWindow = new JActionButton(ButtonAction.OPEN_PAYMENT,"Mostar Historial");
+        buttonShowHistoryWindow = new JActionButton(ButtonAction.OPEN_PAYMENT,"Mostar Historial");
         buttonShowHistoryWindow.setBounds(650, 210, 170, 80);
         
         this.addWindowListener(new WindowAdapter() {
@@ -90,9 +96,30 @@ public class MainWindow extends JFrame {
             	userIDToConsult.setText("Escriba ID a consultar");
             }
         });
+        
+        // action listener de los botones
+        buttonShowHistoryWindow.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Id = userIDToConsult.getText();
+                int IdInt = Integer.parseInt(Id);
+  
+                historyController.proccesTask(IdInt, HistoryWindow, usermanager);
+                System.out.println("Trabajando con: " + IdInt);
+            }
+        });
+        
+        buttonShowTransactionWindow.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String text = userIDToConsult.getText();
+                transWindow();
+                System.out.println("Trabajando con: " + text);
+            }
+        });
+        
         //los metodos son provisionales, solo los uso para poder invocar las otras ventanas
-        buttonShowTransactionWindow.addActionListener(e -> transWindow());
-        buttonShowHistoryWindow.addActionListener(e -> hisWindow());	
+        
         
         TransactionWindow = new TransactionWindow();
         HistoryWindow = new HistoryWindow();
@@ -109,19 +136,6 @@ public class MainWindow extends JFrame {
 	private void hisWindow() {
 		HistoryWindow.setVisible(true);
 	}
-	public static void main(String args[]) {
-		SwingUtilities.invokeLater(() -> {
-			MainWindow frame = new MainWindow();
-	        frame.setVisible(true);
-	    }); 
-		ConfigLoader prueba = new ConfigLoader(); 
-		int p = 2;
-		System.out.println(prueba.getRouteConfig().getRoutes().elementAt(p).getName());
-		System.out.println(prueba.getTimeConfig().getNewTransactionPeriod());
-		Clock clock = new Clock();
-		clock.start();
-		
-
-	}
+	
 
 }

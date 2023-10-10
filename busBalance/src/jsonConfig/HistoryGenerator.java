@@ -1,6 +1,7 @@
 package jsonConfig;
 
 import java.time.LocalDate;
+import java.util.Random;
 import java.util.Vector;
 
 import clock.Clock;
@@ -8,26 +9,26 @@ import modelo.*;
 
 public class HistoryGenerator implements Runnable{
 	private boolean running = true;
-	private Vector<User> usersRegistered;
+	private Vector<User> usersRegistered; //cuidado con esto
 	private RouteConfig routeConfig;
 	private Route asignedRoute;
-	private TimeConfig timeConfig;
+	private TransactionConfig transactionConfig;
 	private Clock clock;
 
-	public HistoryGenerator(Clock pClock) {
+	public HistoryGenerator(Clock pClock, UserManager pUserManager) {
 		this.routeConfig = new ConfigLoader().getRouteConfig();
-		this.usersRegistered = new UserManager().unSerializeUsersRegistered();
-		this.timeConfig = new ConfigLoader().getTimeConfig();
+		this.usersRegistered = pUserManager.unSerializeUsersRegistered();
+		this.transactionConfig = new ConfigLoader().getTransactionConfig();
 		this.clock = pClock;
 	}
 	
 	public void generateTransaction(User pUser) {
 		
 		int balance = pUser.getBalance();
-		int size = usersRegistered.size();
-		int whatTrip = (int) Math.floor(Math.random()*(size+1));
+		int size = routeConfig.getRoutes().size();
+		int whatTrip = (int) Math.floor(Math.random()*(size+1)); ///TODO problema con ese numero random
 		asignedRoute = routeConfig.getRoutes().elementAt(whatTrip);
-		int price =asignedRoute.getCost();
+		int price = asignedRoute.getCost();
 		
 		if (balance >= price) {
 			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));	
@@ -39,12 +40,41 @@ public class HistoryGenerator implements Runnable{
 			System.out.println("no suficiente dinero");
 		}
 	}
-	public void addTransactionToUser() {
+	
+	public void addTransactionToUsers() {
 		for(User lookFor: usersRegistered) {
 			generateTransaction(lookFor);
 		}
 	}
 	
+	// determina segun el json cuantos viaja
+	public void howManyTravel() {
+		
+		Random random = new Random();
+        float randomNum;
+        
+        for (User lookFor: usersRegistered) {
+        	randomNum = random.nextFloat();
+        	if (randomNum <= transactionConfig.getPorcentageOfTravel()) {
+        		generateTransaction(lookFor);
+            }
+        }
+	}
+	
+	//crea usuarios de "mentira" al inicio con parametros del json
+	public void generateInitialUsers() {
+		
+		if(usersRegistered == null) {
+			
+			usersRegistered = new Vector<User>();
+			int usersCount = transactionConfig.getInitialUsersCount();
+			for(int i = 0; i < usersCount; i++ ) {
+				User newUser = new User("persona"+i,i);
+				usersRegistered.add(newUser);
+				System.out.println("se creo Usuario "+newUser.getId());
+			}
+		}
+	}
 	
 	public void stopRunning() {
 		this.running = false;
@@ -52,25 +82,33 @@ public class HistoryGenerator implements Runnable{
 
 	@Override
 	public void run() {
-		addTransactionToUser();
+		generateInitialUsers();
+		addTransactionToUsers();
 		while(running) {
 			
 			try {
-				Thread.sleep(timeConfig.getNewTransactionPeriod()*1000);
-				if(clock.getActualTime().isAfter(timeConfig.getServiceOpen()) && clock.getActualTime().isBefore(timeConfig.getServiceClose())) {
-					addTransactionToUser();
+				Thread.sleep(transactionConfig.getNewTransactionPeriod()*1000);
+				
+				if(clock.getActualTime().isAfter(transactionConfig.getServiceOpen()) && clock.getActualTime().isBefore(transactionConfig.getServiceClose())) {
+					howManyTravel();
 				}
 				
+				if(clock.getActualTime() == transactionConfig.getEveryOneTravels()) {
+					addTransactionToUsers();
+				}
+				
+				
+
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+			///
 			try {
 				Thread.sleep(50);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+			///
 		}
 	}
 

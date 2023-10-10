@@ -18,6 +18,10 @@ public class UserManager implements Serializable {
 		usersRegistered = null;
 	}
 	
+	public Vector<User> getUsersRegistered() {
+		return usersRegistered;
+	}
+
 	public void serializeUsersRegistered() {
 		Vector<User> usersToSerialize = new Vector<>();
 		usersToSerialize = usersRegistered;

@@ -22,6 +22,14 @@ public abstract class Transaction implements Serializable{
 		return date;
 	}
 
+	public TransactionType getTransactionType() {
+		return transactionType;
+	}
+
+	public void setTransactionType(TransactionType transactionType) {
+		this.transactionType = transactionType;
+	}
+
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
