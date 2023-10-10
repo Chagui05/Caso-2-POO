@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3926b0f7-b65c-4ddd-8ff4-dd139b5ad9e6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/../.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.project" beforeDir="false" afterPath="$PROJECT_DIR$/../.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/gui/HistoryWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/gui/HistoryWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/gui/HistoryWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/gui/MainWindow$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/gui/MainWindow$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/gui/MainWindow$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/gui/MainWindow$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/gui/MainWindow$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/gui/MainWindow$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/gui/MainWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/../bin/gui/MainWindow.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2WPYmcAVllDx9yuCeTyep4yIx1A" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/santi/OneDrive/Desktop/TEC-UCR/TEC/II-Semestre/POO/caso-2-POO/busBalance",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3926b0f7-b65c-4ddd-8ff4-dd139b5ad9e6" name="Changes" comment="" />
+      <created>1696635841744</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1696635841744</updated>
+      <workItem from="1696635842754" duration="113000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
