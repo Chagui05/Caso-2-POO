@@ -12,7 +12,7 @@ public class Clock extends Thread{
 	
 
 	public Clock() {
-		this.opens = new ConfigLoader().getTimeConfig().getServiceOpen();
+		this.opens = new ConfigLoader().getTransactionConfig().getServiceOpen();
 		this.actualTime = opens;
 	}
 	

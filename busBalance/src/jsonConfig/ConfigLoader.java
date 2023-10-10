@@ -16,7 +16,7 @@ import modelo.Route;
 public class ConfigLoader {
 	private JsonObject jsonparser;
 	private RouteConfig routeConfig;
-	private TimeConfig timeConfig;
+	private TransactionConfig transactionConfig;
 
 	public ConfigLoader() {
 		loadJson();
@@ -52,20 +52,30 @@ public class ConfigLoader {
 		return routeConfig;
 	}
 	
-	public TimeConfig getTimeConfig(){
-		if (timeConfig == null) {
-			timeConfig = new TimeConfig();
+	public TransactionConfig getTransactionConfig(){
+		if (transactionConfig == null) {
+			transactionConfig = new TransactionConfig();
 			
-			timeConfig.setNewTransactionPeriod(jsonparser.getInt("newTransactionPeriod"));
+			transactionConfig.setNewTransactionPeriod(jsonparser.getInt("newTransactionPeriod"));
+			transactionConfig.setInitialUsersCount(jsonparser.getInt("initialUsersCount"));
+			
+			
+			String porcentage = jsonparser.getString("porcentageOfTravel");
+			Float floatPorcentage = Float.parseFloat(porcentage);
+			transactionConfig.setPorcentageOfTravel(floatPorcentage);
 			
 			String horaString = jsonparser.getString("serviceOpen");
 			LocalTime hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
-			timeConfig.setServiceOpen(hora);
+			transactionConfig.setServiceOpen(hora);
 			
 			horaString = jsonparser.getString("serviceOpen");
 			hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
-			timeConfig.setServiceClose(hora);
+			transactionConfig.setServiceClose(hora);
+			
+			horaString = jsonparser.getString("everyOneTravels");
+			hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
+			transactionConfig.setEveryOneTravels(hora);
 		}
-		return timeConfig;
+		return transactionConfig;
 	}
 }

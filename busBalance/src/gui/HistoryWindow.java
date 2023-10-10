@@ -61,4 +61,20 @@ public class HistoryWindow extends JFrame{
         getContentPane().add(scrollPane2);
 	}
 
+	public Vector<String> getViajesHechos() {
+		return viajesHechos;
+	}
+
+	public void setViajesHechos(Vector<String> viajesHechos) {
+		this.viajesHechos = viajesHechos;
+	}
+
+	public Vector<String> getDepositosHechos() {
+		return depositosHechos;
+	}
+
+	public void setDepositosHechos(Vector<String> depositosHechos) {
+		this.depositosHechos = depositosHechos;
+	}
+
 }
