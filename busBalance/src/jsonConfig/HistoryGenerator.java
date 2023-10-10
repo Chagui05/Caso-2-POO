@@ -9,7 +9,7 @@ import modelo.*;
 
 public class HistoryGenerator implements Runnable{
 	private boolean running = true;
-	private Vector<User> usersRegistered; //cuidado con esto
+	private UserManager userManager; //cuidado con esto
 	private RouteConfig routeConfig;
 	private Route asignedRoute;
 	private TransactionConfig transactionConfig;
@@ -17,7 +17,7 @@ public class HistoryGenerator implements Runnable{
 
 	public HistoryGenerator(Clock pClock, UserManager pUserManager) {
 		this.routeConfig = new ConfigLoader().getRouteConfig();
-		this.usersRegistered = pUserManager.unSerializeUsersRegistered();
+		this.userManager = pUserManager;
 		this.transactionConfig = new ConfigLoader().getTransactionConfig();
 		this.clock = pClock;
 	}
@@ -42,7 +42,7 @@ public class HistoryGenerator implements Runnable{
 	}
 	
 	public void addTransactionToUsers() {
-		for(User lookFor: usersRegistered) {
+		for(User lookFor: userManager.getUsersRegistered()) {
 			generateTransaction(lookFor);
 		}
 	}
@@ -53,7 +53,7 @@ public class HistoryGenerator implements Runnable{
 		Random random = new Random();
         float randomNum;
         
-        for (User lookFor: usersRegistered) {
+        for (User lookFor: userManager.getUsersRegistered()) {
         	randomNum = random.nextFloat();
         	if (randomNum <= transactionConfig.getPorcentageOfTravel()) {
         		generateTransaction(lookFor);
@@ -64,15 +64,16 @@ public class HistoryGenerator implements Runnable{
 	//crea usuarios de "mentira" al inicio con parametros del json
 	public void generateInitialUsers() {
 		
-		if(usersRegistered == null) {
+		if(userManager.getUsersRegistered() == null) {
 			
-			usersRegistered = new Vector<User>();
+			Vector<User> usersRegistered = new Vector<User>();
 			int usersCount = transactionConfig.getInitialUsersCount();
 			for(int i = 0; i < usersCount; i++ ) {
 				User newUser = new User("persona"+i,i);
 				usersRegistered.add(newUser);
 				System.out.println("se creo Usuario "+newUser.getId());
 			}
+			userManager.setUsersRegistered(usersRegistered);
 		}
 	}
 	

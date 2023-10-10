@@ -60,4 +60,8 @@ public class UserManager implements Serializable {
 		return null;
 	}
 
+	public void setUsersRegistered(Vector<User> usersRegistered) {
+		this.usersRegistered = usersRegistered;
+	}
+
 }
