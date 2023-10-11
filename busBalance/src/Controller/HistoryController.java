@@ -21,7 +21,7 @@ public class HistoryController {
 		try {
 			Vector<Transaction> history = usermanager.getUser(Id).getTransactions();
 			HistoryWindow.setVisible(true);
-			System.out.println(Id+" con ruta "+history.get(0).getName());
+			System.out.println(Id+" con ruta "+history.elementAt(1).getName());
 			showHistory(history);
 
 		} catch (NullPointerException e) {

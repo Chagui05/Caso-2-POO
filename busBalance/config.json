@@ -41,7 +41,7 @@
       "price": 2000
     }
   ],
-  "newTransactionPeriod": 10,
+  "newTransactionPeriod": 30,
   "serviceOpen": "05:00",
   "serviceClose": "23:00",
   "everyOneTravels": "12:00",
