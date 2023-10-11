@@ -26,9 +26,12 @@ public class HistoryGenerator implements Runnable{
 		
 		int balance = pUser.getBalance();
 		int size = routeConfig.getRoutes().size();
-		int whatTrip = (int) Math.floor(Math.random()*(size+1)); ///TODO problema con ese numero random
+		Random random = new Random();
+		int whatTrip = random.nextInt(size); ///TODO problema con ese numero random
 		asignedRoute = routeConfig.getRoutes().elementAt(whatTrip);
 		int price = asignedRoute.getCost();
+		
+		System.out.println("User: "+ pUser.getId()+"Plata: "+pUser.getBalance());
 		
 		if (balance >= price) {
 			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));	
@@ -38,6 +41,7 @@ public class HistoryGenerator implements Runnable{
 		}
 		else {
 			System.out.println("no suficiente dinero");
+			System.out.println();
 		}
 	}
 	
@@ -86,12 +90,26 @@ public class HistoryGenerator implements Runnable{
 	public void run() {
 		generateInitialUsers();
 		addTransactionToUsers();
+		
+		User pUser = userManager.getUser(1);
+		int size = routeConfig.getRoutes().size();
+		Random random = new Random();
+		int whatTrip = random.nextInt(size); ///TODO problema con ese numero random
+		asignedRoute = routeConfig.getRoutes().elementAt(whatTrip);
+		int price = asignedRoute.getCost();
+			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));	
+			System.out.println(asignedRoute.getName()+" asignada a "+pUser.getId());
+			System.out.println();
+			
 		while(running) {
 			
 			try {
-				System.out.println("en el hilo "+userManager.getUser(2));
+				System.out.println("en el hilo "+userManager.getUser(2).getName()+" "+userManager.getUser(2).getBalance());
 				Thread.sleep(transactionConfig.getNewTransactionPeriod()*1000);
+				System.out.println(clock.getActualTime());
+				
 				if(clock.getActualTime().isAfter(transactionConfig.getServiceOpen()) && clock.getActualTime().isBefore(transactionConfig.getServiceClose())) {
+					
 					howManyTravel();
 				}
 				

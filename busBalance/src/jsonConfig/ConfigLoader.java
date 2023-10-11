@@ -68,7 +68,7 @@ public class ConfigLoader {
 			LocalTime hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
 			transactionConfig.setServiceOpen(hora);
 			
-			horaString = jsonparser.getString("serviceOpen");
+			horaString = jsonparser.getString("serviceClose");
 			hora = LocalTime.parse(horaString, DateTimeFormatter.ofPattern("HH:mm"));
 			transactionConfig.setServiceClose(hora);
 			

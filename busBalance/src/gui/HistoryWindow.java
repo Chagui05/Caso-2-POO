@@ -17,6 +17,8 @@ public class HistoryWindow extends JFrame{
 	 */
 	private Vector<String> viajesHechos;
 	private Vector<String> depositosHechos;
+	private JList<String> tripList;
+	private JList<String> depositList;
 
 	public HistoryWindow() {
 		setTitle("Historial");
@@ -38,7 +40,7 @@ public class HistoryWindow extends JFrame{
         depositSubTitle.setForeground(Color.BLACK); 
         depositSubTitle.setBounds(80, 70, 200, 40);
         
-        JList<String> depositList = new JList<>(depositosHechos);
+        depositList = new JList<>(depositosHechos);
         JScrollPane scrollPane = new JScrollPane(depositList);
         scrollPane.setBounds(50, 120, 200, 210);
         
@@ -48,7 +50,7 @@ public class HistoryWindow extends JFrame{
         tripSubtitle.setForeground(Color.BLACK); 
         tripSubtitle.setBounds(530, 70, 150, 40);
         
-        JList<String> tripList = new JList<>(viajesHechos);
+        tripList = new JList<>(viajesHechos);
         JScrollPane scrollPane2 = new JScrollPane(tripList);
         scrollPane2.setBounds(490, 120, 200, 200);
         
@@ -61,20 +63,14 @@ public class HistoryWindow extends JFrame{
         getContentPane().add(scrollPane2);
 	}
 
-	public Vector<String> getViajesHechos() {
-		return viajesHechos;
-	}
+	
 
-	public void setViajesHechos(Vector<String> viajesHechos) {
-		this.viajesHechos = viajesHechos;
+	public void setTripList(Vector<String> pTripList) {
+		tripList.setListData(pTripList);
 	}
-
-	public Vector<String> getDepositosHechos() {
-		return depositosHechos;
-	}
-
-	public void setDepositosHechos(Vector<String> depositosHechos) {
-		this.depositosHechos = depositosHechos;
+	
+	public void setDepositList(Vector<String> pDepositList) {
+		depositList.setListData(pDepositList);
 	}
 
 }

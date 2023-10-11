@@ -2,18 +2,24 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import Controller.TransactionController;
+import jsonConfig.UserManager;
+
 public class TransactionWindow extends JFrame{
 	
-	/*
-	 * un sistema como de caja donde se le puede cargar X monto a dicho usuario para viajes
-	 */
+	private int IdToLookfor;
 	
-	public TransactionWindow() {
+
+	public TransactionWindow(UserManager pUserManager) {
+		TransactionController tranControl = new TransactionController();
+		
 		setTitle("Recargas");
         setSize(600, 350); 
         setResizable(false); 
@@ -32,10 +38,23 @@ public class TransactionWindow extends JFrame{
         JActionButton payButton = new JActionButton(ButtonAction.PAY,"Recargar monto");
         payButton.setBounds(218, 220, 180, 70);
         
+        payButton.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selection = (int) paymentBox.getSelectedItem();
+                System.out.println("tranWindow"+ pUserManager.getUsersRegistered().elementAt(1).getId());
+                tranControl.addDeposit(selection, pUserManager, IdToLookfor);	
+            }
+        });
+        
         getContentPane().setLayout(null);
         getContentPane().add(labelTitle);
         getContentPane().add(paymentBox);
         getContentPane().add(payButton);
+	}
+
+	public void setIdToLookfor(int idToLookfor) {
+		IdToLookfor = idToLookfor;
 	}
 
 }

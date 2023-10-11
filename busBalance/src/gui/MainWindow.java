@@ -9,6 +9,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 import Controller.HistoryController;
+import Controller.MainCreateUserController;
+import Controller.TransactionController;
 import jsonConfig.UserManager;
 
 public class MainWindow extends JFrame {
@@ -19,9 +21,14 @@ public class MainWindow extends JFrame {
 	private JTextField userIDToConsult;
 	private UserManager usermanager;
 	private HistoryController historyController;
+	private TransactionController transactionController;
+	private MainCreateUserController mainCreateUserController;
 	
 	public MainWindow(UserManager pUsermanager) {
 		historyController = new HistoryController();
+		transactionController = new TransactionController();
+		mainCreateUserController = new MainCreateUserController();
+		
 		this.usermanager = pUsermanager;
 		System.out.println("creando ventana");
 		
@@ -43,6 +50,7 @@ public class MainWindow extends JFrame {
 
         JTextField userID = new JTextField();
         userID.setBounds(40, 100, 220, 30);
+        
         JTextField userName = new JTextField();
         userName.setBounds(40, 160, 220, 30);
 
@@ -59,6 +67,19 @@ public class MainWindow extends JFrame {
         
         JActionButton buttonCreateUSer = new JActionButton(ButtonAction.CREATE_USER,"Crear");
         buttonCreateUSer.setBounds(65, 210, 170, 60);
+        
+//        crear usuario actionListener
+        
+        buttonCreateUSer.addActionListener((ActionListener) new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String Id = userID.getText();
+                String name = userName.getText();
+  
+                mainCreateUserController.proccesTask(Id, name, usermanager);
+                System.out.println("Trabajando con: " + Id);
+            }
+        });
 
         ImageIcon imageIcon = new ImageIcon("blackLine.png");
         JLabel imageBlackLine = new JLabel(imageIcon);
@@ -113,16 +134,19 @@ public class MainWindow extends JFrame {
         buttonShowTransactionWindow.addActionListener((ActionListener) new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String text = userIDToConsult.getText();
-                transWindow();
-                System.out.println("Trabajando con: " + text);
+            	String Id = userIDToConsult.getText();
+                int IdInt = Integer.parseInt(Id);
+  
+                transactionController.proccesTask(IdInt, TransactionWindow, usermanager);
+                TransactionWindow.setIdToLookfor(IdInt);
+                System.out.println("Trabajando con: " + IdInt);
             }
         });
         
         //los metodos son provisionales, solo los uso para poder invocar las otras ventanas
         
         
-        TransactionWindow = new TransactionWindow();
+        TransactionWindow = new TransactionWindow(usermanager);
         HistoryWindow = new HistoryWindow();
         
         getContentPane().add(imageBlackLine2);
@@ -131,12 +155,5 @@ public class MainWindow extends JFrame {
         getContentPane().add(buttonShowTransactionWindow);
         getContentPane().add(buttonShowHistoryWindow);
 	}
-	private void transWindow() {
-		TransactionWindow.setVisible(true);
-	}
-	private void hisWindow() {
-		HistoryWindow.setVisible(true);
-	}
-	
 
 }
