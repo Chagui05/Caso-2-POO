@@ -43,6 +43,7 @@ public class TransactionController {
 		user = pUserManager.getUser(Id);
 		Transaction transa = new Deposit(pAmount,"Deposito de: "+pAmount,user.getId(), LocalDate.now());
 		user.addTransaction(transa);
+		user.addMoreMoney(pAmount);
 		
 		for(Transaction trans: pUserManager.getUser(Id).getTransactions()) {
 			System.out.println("TRANSACTIONS DE: "+pUserManager.getUser(Id).getName());

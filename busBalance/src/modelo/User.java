@@ -19,7 +19,12 @@ public class User implements Serializable {
 	public void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
 	}
-
+	public void addMoreMoney(int pAmount) {
+		this.balance+=pAmount;
+	}
+	public void eliminateAmountOfMoney(int pAmount) {
+		this.balance-=pAmount;
+	}
 	public String getName() {
 		return name;
 	}

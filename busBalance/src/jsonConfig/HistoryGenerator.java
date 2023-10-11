@@ -34,7 +34,8 @@ public class HistoryGenerator implements Runnable{
 		System.out.println("User: "+ pUser.getId()+"Plata: "+pUser.getBalance());
 		
 		if (balance >= price) {
-			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));	
+			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));
+			pUser.eliminateAmountOfMoney(price);
 			System.out.println(asignedRoute);
 			System.out.println(" asignada a ");
 			System.out.println(pUser);
