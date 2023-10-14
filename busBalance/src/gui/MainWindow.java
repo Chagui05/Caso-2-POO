@@ -32,6 +32,17 @@ public class MainWindow extends JFrame {
 		this.usermanager = pUsermanager;
 		System.out.println("creando ventana");
 		
+		
+		addWindowListener(new WindowAdapter() {
+		    @Override
+		    public void windowClosing(WindowEvent e) {
+		    	System.out.println("cerrando ventana :(");
+		        usermanager.serializeUsersRegistered();
+		        dispose();
+		        System.exit(0);
+		    }
+		});
+
 		/*
 		 * creación de un usuario basado en la identificación del usuario
 		 */

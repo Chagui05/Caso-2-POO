@@ -21,7 +21,6 @@ public class HistoryController {
 		try {
 			Vector<Transaction> history = usermanager.getUser(Id).getTransactions();
 			HistoryWindow.setVisible(true);
-			System.out.println(Id+" con ruta "+history.elementAt(1).getName());
 			showHistory(history);
 
 		} catch (NullPointerException e) {
@@ -41,12 +40,10 @@ public class HistoryController {
 		
 		for (Transaction tran : history) {
 			if(tran.getTransactionType() == TransactionType.DEPOSIT ) {
-				System.out.println("buscando depositos");
 				depositosHechos.add(tran.getName());
 				
 			}
 			else {
-				System.out.println("buscando viajes");
 				viajesHechos.add(tran.getName());	
 			}
 		}

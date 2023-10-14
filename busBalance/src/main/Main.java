@@ -13,6 +13,7 @@ public class Main {
 		
 		
 		UserManager userManager = new UserManager();
+		userManager.unSerializeUsersRegistered();
 		Clock clock = new Clock();
 		HistoryGenerator historyGenerator = new HistoryGenerator(clock,userManager);
         
@@ -21,10 +22,14 @@ public class Main {
         historyThread.start();
       	System.out.println("en el main "+userManager.getUser(2));
         
+      	MainWindow frame = new MainWindow(userManager);
         SwingUtilities.invokeLater(() -> {
-			MainWindow frame = new MainWindow(userManager);
+			
 	        frame.setVisible(true);
+	        
 	    }); 
+        
+        
 		
 
 	}
