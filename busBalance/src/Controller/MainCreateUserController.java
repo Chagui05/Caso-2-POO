@@ -17,14 +17,14 @@ public class MainCreateUserController {
 		
 		try {
 			IdInt = Integer.parseInt(Id);
-			System.out.println("Valor entero: " + IdInt);
-			
 			if(usermanager.getUser(IdInt) != null) {
 				JOptionPane.showMessageDialog(null, "El usuario ya existe", "Error", JOptionPane.ERROR_MESSAGE);
 			}
-			usermanager.AddUser(new User(name, IdInt));
+			else {
+				usermanager.AddUser(new User(name, IdInt));
+				JOptionPane.showMessageDialog(null, name+" Agregado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+			}
 				
-			
 			} 
 		catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "El ID debe ser un numero", "Error", JOptionPane.ERROR_MESSAGE);

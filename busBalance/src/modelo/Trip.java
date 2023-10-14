@@ -1,8 +1,9 @@
 package modelo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Trip extends Transaction {
+public class Trip extends Transaction implements Serializable{
 	private Route route;
 	
 	public Trip(int pAmount, String pName, int pUserId, LocalDate pDate, Route pRoute){

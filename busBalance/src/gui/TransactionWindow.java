@@ -42,7 +42,6 @@ public class TransactionWindow extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 int selection = (int) paymentBox.getSelectedItem();
-                System.out.println("tranWindow"+ pUserManager.getUsersRegistered().elementAt(1).getId());
                 tranControl.addDeposit(selection, pUserManager, IdToLookfor);	
             }
         });
@@ -53,8 +52,10 @@ public class TransactionWindow extends JFrame{
         getContentPane().add(payButton);
 	}
 
-	public void setIdToLookfor(int idToLookfor) {
+	public void setIdToLookfor(String id) {
+		int idToLookfor = Integer.parseInt(id);
 		IdToLookfor = idToLookfor;
+		System.out.print(idToLookfor);
 	}
 
 }

@@ -16,14 +16,16 @@ public class HistoryController {
 	public HistoryController() {
 		// TODO Auto-generated constructor stub
 	}
-	public void proccesTask(int Id, HistoryWindow HistoryWindow, UserManager usermanager) {
+	public void proccesTask(String Id, HistoryWindow HistoryWindow, UserManager usermanager) {
 		this.HistoryWindow = HistoryWindow;
 		try {
-			Vector<Transaction> history = usermanager.getUser(Id).getTransactions();
+			int IdInt = Integer.parseInt(Id);
+			Vector<Transaction> history = usermanager.getUser(IdInt).getTransactions();
 			HistoryWindow.setVisible(true);
 			showHistory(history);
+			System.out.println("Historial de: "+ usermanager.getUser(IdInt).getName());
 
-		} catch (NullPointerException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Usuario no encontrado", "Error", JOptionPane.ERROR_MESSAGE);
 		}
@@ -41,7 +43,6 @@ public class HistoryController {
 		for (Transaction tran : history) {
 			if(tran.getTransactionType() == TransactionType.DEPOSIT ) {
 				depositosHechos.add(tran.getName());
-				
 			}
 			else {
 				viajesHechos.add(tran.getName());	

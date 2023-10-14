@@ -14,13 +14,21 @@ public class Main {
 		
 		UserManager userManager = new UserManager();
 		userManager.unSerializeUsersRegistered();
+		System.out.println("Usuarios hallados");
+        userManager.getUsersRegistered().forEach(elemento -> System.out.println( "Nombre: "+ elemento.getName()+" Saldo: "+elemento.getBalance()));
+        
+        try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+        
 		Clock clock = new Clock();
 		HistoryGenerator historyGenerator = new HistoryGenerator(clock,userManager);
         
         Thread historyThread = new Thread(historyGenerator);
         clock.start();
         historyThread.start();
-      	System.out.println("en el main "+userManager.getUser(2));
         
       	MainWindow frame = new MainWindow(userManager);
         SwingUtilities.invokeLater(() -> {
@@ -29,8 +37,6 @@ public class Main {
 	        
 	    }); 
         
-        
-		
-
+    
 	}
 }

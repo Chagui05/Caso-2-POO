@@ -38,6 +38,7 @@ public class MainWindow extends JFrame {
 		    public void windowClosing(WindowEvent e) {
 		    	System.out.println("cerrando ventana :(");
 		        usermanager.serializeUsersRegistered();
+		        usermanager.getUsersRegistered().forEach(elemento -> System.out.println("Nombre: "+elemento.getName()+" Saldo: "+elemento.getBalance()));
 		        dispose();
 		        System.exit(0);
 		    }
@@ -88,7 +89,6 @@ public class MainWindow extends JFrame {
                 String name = userName.getText();
   
                 mainCreateUserController.proccesTask(Id, name, usermanager);
-                System.out.println("Trabajando con: " + Id);
             }
         });
 
@@ -135,10 +135,8 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String Id = userIDToConsult.getText();
-                int IdInt = Integer.parseInt(Id);
-  
-                historyController.proccesTask(IdInt, HistoryWindow, usermanager);
-                System.out.println("Trabajando con: " + IdInt);
+                
+                historyController.proccesTask(Id, HistoryWindow, usermanager);
             }
         });
         
@@ -146,11 +144,8 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
             	String Id = userIDToConsult.getText();
-                int IdInt = Integer.parseInt(Id);
-  
-                transactionController.proccesTask(IdInt, TransactionWindow, usermanager);
-                TransactionWindow.setIdToLookfor(IdInt);
-                System.out.println("Trabajando con: " + IdInt);
+                transactionController.proccesTask(Id, TransactionWindow, usermanager);
+                TransactionWindow.setIdToLookfor(Id);
             }
         });
         

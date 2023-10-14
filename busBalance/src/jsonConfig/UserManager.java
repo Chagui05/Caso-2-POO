@@ -29,7 +29,7 @@ public class UserManager implements Serializable {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("serializedUsers.ser"))) {
 			out.writeObject(usersToSerialize);
 			out.close();
-            System.out.println("Vector serializado correctamente");
+            System.out.println("usuarios serializados correctamente");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class UserManager implements Serializable {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("serializedUsers.ser"))) {
 			usersRegistered = (Vector<User>) in.readObject();
 			in.close();
-            System.out.println("Vector deserializado correctamente.");
+			System.out.println("usuarios deserializados correctamente");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

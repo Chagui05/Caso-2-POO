@@ -1,6 +1,8 @@
 package modelo;
 
-public class Route {
+import java.io.Serializable;
+
+public class Route implements Serializable {
 	int price;
 	String name;
 	//TODO ConfigRuta configuration;

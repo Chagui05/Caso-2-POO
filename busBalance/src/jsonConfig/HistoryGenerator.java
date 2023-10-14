@@ -36,13 +36,9 @@ public class HistoryGenerator implements Runnable{
 		if (balance >= price) {
 			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));
 			pUser.eliminateAmountOfMoney(price);
-			System.out.println(asignedRoute);
-			System.out.println(" asignada a ");
-			System.out.println(pUser);
 		}
 		else {
 			System.out.println("no suficiente dinero");
-			System.out.println();
 		}
 	}
 	
@@ -79,7 +75,6 @@ public class HistoryGenerator implements Runnable{
 				System.out.println("se creo Usuario "+newUser.getId());
 			}
 			userManager.setUsersRegistered(usersRegistered);
-			System.out.println("en la funcion "+userManager.getUser(2));
 		}
 	}
 	
@@ -92,25 +87,11 @@ public class HistoryGenerator implements Runnable{
 		generateInitialUsers();
 		addTransactionToUsers();
 		
-		User pUser = userManager.getUser(1);
-		int size = routeConfig.getRoutes().size();
-		Random random = new Random();
-		int whatTrip = random.nextInt(size); ///TODO problema con ese numero random
-		asignedRoute = routeConfig.getRoutes().elementAt(whatTrip);
-		int price = asignedRoute.getCost();
-			pUser.addTransaction(new Trip(price, asignedRoute.getName(),pUser.getId(),LocalDate.now() , asignedRoute));	
-			System.out.println(asignedRoute.getName()+" asignada a "+pUser.getId());
-			System.out.println();
-			
 		while(running) {
 			
 			try {
-				System.out.println("en el hilo "+userManager.getUser(2).getName()+" "+userManager.getUser(2).getBalance());
-				Thread.sleep(transactionConfig.getNewTransactionPeriod()*1000);
-				System.out.println(clock.getActualTime());
-				
-				if(clock.getActualTime().isAfter(transactionConfig.getServiceOpen()) && clock.getActualTime().isBefore(transactionConfig.getServiceClose())) {
-					
+				Thread.sleep(transactionConfig.getNewTransactionPeriod()*1000);				
+				if(clock.getActualTime().isAfter(transactionConfig.getServiceOpen()) && clock.getActualTime().isBefore(transactionConfig.getServiceClose())) {					
 					howManyTravel();
 				}
 				
