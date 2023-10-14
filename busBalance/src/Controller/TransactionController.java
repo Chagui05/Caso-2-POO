@@ -24,7 +24,9 @@ public class TransactionController {
 		try {
 			int IdInt = Integer.parseInt(Id);
 			user = pUserManager.getUser(IdInt);
+			user.getBalance(); //esa funcion es por si el usuario es nulo tire exception y asi no se abre ventana y muestre mensaje
 			transactionWIndow.setVisible(true);
+	
 
 		} catch (Exception e) {
 			e.printStackTrace();
