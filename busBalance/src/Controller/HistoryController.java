@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JList;
@@ -37,21 +39,20 @@ public class HistoryController {
 	
 	public void showHistory(Vector<Transaction> history) {
 	
-		Vector<String> viajesHechos = new Vector<>();
-		Vector<String> depositosHechos = new Vector<>();
-		
+		Vector<Vector<String>> historyEvents = new Vector<>();
 		for (Transaction tran : history) {
-			if(tran.getTransactionType() == TransactionType.DEPOSIT ) {
-				depositosHechos.add(tran.getName());
-			}
-			else {
-				viajesHechos.add(tran.getName());	
-			}
+			List<String> eventList = Arrays.asList(
+			            String.valueOf(tran.getUserId()),
+			            tran.getName(),
+			            tran.getTransactionType().name(),
+			            tran.getDate().toString(),
+			            String.valueOf(tran.getAmount())
+			        );
+			
+			Vector<String> event = new Vector<>(eventList);
+			historyEvents.add(event);
 		}
-		HistoryWindow.setTripList(viajesHechos);
-		HistoryWindow.setDepositList(depositosHechos);
-		
-		
+		HistoryWindow.setTable(historyEvents);
 	}
 		
 }
